@@ -18,3 +18,18 @@ each(['one', undefined], ({ title }, stack) => {
     },
   )
 })
+
+test('Updates stack', (t) => {
+  const error = new Error('one')
+  error.stack = 'Error: one\nstackLines'
+  setErrorClass(error, TypeError)
+  t.is(error.stack, 'TypeError: one\nstackLines')
+})
+
+each(['', 'Other'], ({ title }, name) => {
+  test(`Is a noop if current name cannot be found | ${title}`, (t) => {
+    const error = new Error('one')
+    const { stack } = error
+    t.is(setErrorClass(error, TypeError, name).stack, stack)
+  })
+})
