@@ -1,1 +1,44 @@
-export const updatePrototype = function (error, ErrorClass) {}
+export const updatePrototype = function (error, ErrorClass) {
+  setPrototype(error, ErrorClass)
+  fixConstructor(error, ErrorClass)
+  fixName(error, ErrorClass)
+}
+
+const setPrototype = function (error, ErrorClass) {
+  if (Object.getPrototypeOf(error) !== ErrorClass.prototype) {
+    // eslint-disable-next-line fp/no-mutating-methods
+    Object.setPrototypeOf(error, ErrorClass.prototype)
+  }
+}
+
+const fixConstructor = function (error, ErrorClass) {
+  if (error.constructor !== ErrorClass) {
+    // eslint-disable-next-line fp/no-delete
+    delete error.constructor
+  }
+}
+
+const fixName = function (error, ErrorClass) {
+  const prototypeName = getClassName(ErrorClass)
+
+  if (
+    prototypeName === error.name ||
+    typeof prototypeName !== 'string' ||
+    prototypeName === ''
+  ) {
+    return
+  }
+
+  // eslint-disable-next-line fp/no-delete
+  delete error.name
+}
+
+const getClassName = function (ErrorClass) {
+  if (ErrorClass === null) {
+    return 'Error'
+  }
+
+  return typeof ErrorClass.name === 'string' && ErrorClass.name !== ''
+    ? ErrorClass.name
+    : getClassName(Object.getPrototypeOf(ErrorClass))
+}
