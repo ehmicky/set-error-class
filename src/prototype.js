@@ -2,6 +2,10 @@ import { setNonEnumProp } from './enum.js'
 
 // Changes an error's prototype, `constructor` and `name`
 export const updatePrototype = function (error, ErrorClass) {
+  if (Object.getPrototypeOf(error) === ErrorClass.prototype) {
+    return
+  }
+
   setPrototype(error, ErrorClass)
   deleteOwnProperty(error, 'constructor')
   fixName(error, ErrorClass)
@@ -12,10 +16,8 @@ export const updatePrototype = function (error, ErrorClass) {
 // However, `error` will have been instantiated with a different constructor,
 // which is a difference, especially if error properties are not copied.
 const setPrototype = function (error, ErrorClass) {
-  if (Object.getPrototypeOf(error) !== ErrorClass.prototype) {
-    // eslint-disable-next-line fp/no-mutating-methods
-    Object.setPrototypeOf(error, ErrorClass.prototype)
-  }
+  // eslint-disable-next-line fp/no-mutating-methods
+  Object.setPrototypeOf(error, ErrorClass.prototype)
 }
 
 // Ensure `error` has a valid `name`.

@@ -31,6 +31,13 @@ test('Fix name shadowing', (t) => {
   t.is(error.name, TypeError.prototype.name)
 })
 
+test('Does not fix name shadowing if class has not changed', (t) => {
+  const error = new TypeError('test')
+  error.name = 'RangeError'
+  setErrorClass(error, TypeError)
+  t.is(error.name, 'RangeError')
+})
+
 each([undefined, true, ''], ({ title }, name) => {
   test(`Works with classes without a prototype name | ${title}`, (t) => {
     // eslint-disable-next-line fp/no-class
