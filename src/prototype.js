@@ -38,35 +38,28 @@ const fixName = function (error, ErrorClass) {
 }
 
 const getClassName = function (prototype) {
-  if (prototype === null) {
-    return 'Error'
-  }
-
-  const prototypeName = getObjectName(prototype)
-
-  if (prototypeName !== undefined) {
-    return prototypeName
-  }
-
-  const constructorName = getObjectName(prototype.constructor)
-
-  if (constructorName !== undefined) {
-    return constructorName
-  }
-
-  return getClassName(Object.getPrototypeOf(prototype))
+  return (
+    getPrototypeName(prototype) ??
+    getConstructorName(prototype) ??
+    getClassName(Object.getPrototypeOf(prototype))
+  )
 }
 
-const getObjectName = function (object) {
-  return isObject(object) &&
-    typeof object.name === 'string' &&
-    object.name !== ''
-    ? object.name
+const getPrototypeName = function (prototype) {
+  return isOwn.call(prototype, 'name') && isDefinedString(prototype.name)
+    ? prototype.name
     : undefined
 }
 
-const isObject = function (value) {
-  return typeof value === 'object' && value !== null
+const getConstructorName = function (prototype) {
+  return typeof prototype.constructor === 'function' &&
+    isDefinedString(prototype.constructor.name)
+    ? prototype.constructor.name
+    : undefined
+}
+
+const isDefinedString = function (value) {
+  return typeof value === 'string' && value !== ''
 }
 
 // Delete `error.constructor|name` to ensure it is not shadowing
