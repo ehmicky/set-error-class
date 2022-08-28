@@ -7,3 +7,9 @@ test('Sets the prototype', (t) => {
   setErrorClass(error, TypeError)
   t.true(error instanceof TypeError)
 })
+
+test('Keeps the prototype if equal', (t) => {
+  const error = new TypeError('test')
+  setErrorClass(error, TypeError)
+  t.true(error instanceof TypeError)
+})
