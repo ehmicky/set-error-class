@@ -24,7 +24,9 @@
     "lib": "src",
     "test": "test"
   },
-  "dependencies": {},
+  "dependencies": {
+    "normalize-exception": "^2.5.0"
+  },
   "devDependencies": {
     "@ehmicky/dev-tasks": "^1.0.85"
   },

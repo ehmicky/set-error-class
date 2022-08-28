@@ -1,7 +1,4 @@
-/**
- * `set-error-class` options
- */
-export interface Options {}
+type NormalizeError<ErrorArg> = ErrorArg extends Error ? ErrorArg : Error
 
 /**
  *
@@ -9,4 +6,8 @@ export interface Options {}
  * ```js
  * ```
  */
-export default function setErrorClass(value: any, options?: Options): object
+export default function setErrorClass<ErrorArg>(
+  error: ErrorArg,
+  ErrorClass: typeof Error,
+  currentName?: string,
+): NormalizeError<ErrorArg>
