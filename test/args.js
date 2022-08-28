@@ -17,7 +17,7 @@ each(
   // eslint-disable-next-line unicorn/no-null
   [null, true, undefined, () => {}, funcWithNullPrototype, Set, OddError],
   ({ title }, notAClass) => {
-    test(`Validate second argument | ${title}`, (t) => {
+    test(`Validate second argument is an error class | ${title}`, (t) => {
       t.throws(setErrorClass.bind(undefined, new Error('one'), notAClass))
     })
   },
