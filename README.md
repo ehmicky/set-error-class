@@ -6,14 +6,26 @@
 
 Properly update an error's class.
 
-Work in progress!
-
 # Features
 
 # Example
 
+<!-- eslint-disable no-restricted-imports -->
+
 ```js
+import assert from 'assert'
+
 import setErrorClass from 'set-error-class'
+
+const typeError = new TypeError('test')
+assert(typeError instanceof TypeError)
+console.log(typeError.stack) // TypeError: test ...
+
+const rangeError = setErrorClass(typeError, RangeError)
+assert(rangeError === typeError)
+assert(rangeError instanceof RangeError)
+assert(rangeError.name === 'RangeError')
+console.log(rangeError.stack) // RangeError: test ...
 ```
 
 # Install
@@ -28,19 +40,38 @@ not `require()`.
 
 # API
 
-## setErrorClass(value, options?)
+## setErrorClass(error, ErrorClass, currentName?)
 
-`value` `any`\
-`options` [`Options?`](#options)\
-_Return value_: [`object`](#return-value)
+`error` `Error | unknown`\
+`ErrorClass` `ErrorClass`\
+`currentName` `string?`\
+_Return value_: `Error`
 
-### Options
+Sets the `error`'s class:
+[prototype](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/getPrototypeOf),
+[`name`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error/name)
+and
+[`constructor`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/constructor).
 
-Object with the following properties.
+### Invalid errors
 
-### Return value
+`error` is returned. If `error` is not an `Error` instance, it is converted to
+one.
 
-Object with the following properties.
+### `error.stack`
+
+In V8 (Chrome, Node.js, Deno, etc.),
+[`error.stack`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error/stack)
+includes
+[`error.name`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error/message).
+However, if `error.name` is modified, `error.stack` might not be updated and
+still contain the previous name.
+
+This library ensures `error.stack` is updated accordingly. If `error.stack`
+contains `currentName` (which defaults to the current `error.name`), it is
+replaced by the new `error.name`.
+
+### Error constructors
 
 # Related projects
 
