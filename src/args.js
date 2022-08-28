@@ -47,5 +47,5 @@ const isErrorClass = function (prototype) {
 }
 
 const hasConstructor = function (ErrorClass) {
-  return ErrorClass.prototype.constructor === ErrorClass
+  return typeof ErrorClass.prototype.constructor === 'function'
 }

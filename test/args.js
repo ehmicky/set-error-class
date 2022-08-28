@@ -11,7 +11,7 @@ funcWithNullPrototype.prototype = null
 // eslint-disable-next-line fp/no-class
 class OddError extends Error {}
 // eslint-disable-next-line fp/no-mutation
-OddError.prototype.constructor = TypeError
+OddError.prototype.constructor = ''
 
 each(
   // eslint-disable-next-line unicorn/no-null
