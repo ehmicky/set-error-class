@@ -4,7 +4,11 @@ import setErrorClass from './main.js'
 
 const error = new Error('test')
 expectAssignable<Error>(setErrorClass(error, Error))
+
 setErrorClass(error, Error, '')
+setErrorClass(error, TypeError, '')
+class TestError extends Error {}
+setErrorClass(error, TestError, '')
 
 expectError(setErrorClass(error))
 expectError(setErrorClass(error, 'Error'))

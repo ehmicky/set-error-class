@@ -8,6 +8,6 @@ type NormalizeError<ErrorArg> = ErrorArg extends Error ? ErrorArg : Error
  */
 export default function setErrorClass<ErrorArg>(
   error: ErrorArg,
-  ErrorClass: typeof Error,
+  ErrorClass: Function,
   currentName?: string,
 ): NormalizeError<ErrorArg>
