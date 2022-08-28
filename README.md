@@ -73,6 +73,10 @@ replaced by the new `error.name`.
 
 ### Error constructors
 
+`ErrorClass` is assigned to `error`, but its constructor is not called. In some
+instances, this might lead to invalid errors. If `ErrorClass`'s constructor is
+doing anything significant, it should be replicated on `error` as well.
+
 # Related projects
 
 # Support
