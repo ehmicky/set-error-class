@@ -1,13 +1,45 @@
+import { runInNewContext } from 'vm'
+
 import test from 'ava'
 import setErrorClass from 'set-error-class'
 import { each } from 'test-each'
 
-// eslint-disable-next-line unicorn/no-null
-each([null, true, undefined], ({ title }, notAClass) => {
-  test(`Validate second argument | ${title}`, (t) => {
-    t.throws(setErrorClass.bind(undefined, new Error('one'), notAClass))
-  })
-})
+const funcWithNullPrototype = function () {}
+// eslint-disable-next-line unicorn/no-null, fp/no-mutation
+funcWithNullPrototype.prototype = null
+
+// eslint-disable-next-line fp/no-class
+class OddError extends Error {}
+// eslint-disable-next-line fp/no-mutation
+OddError.prototype.constructor = TypeError
+
+each(
+  // eslint-disable-next-line unicorn/no-null
+  [null, true, undefined, () => {}, funcWithNullPrototype, Set, OddError],
+  ({ title }, notAClass) => {
+    test(`Validate second argument | ${title}`, (t) => {
+      t.throws(setErrorClass.bind(undefined, new Error('one'), notAClass))
+    })
+  },
+)
+
+// eslint-disable-next-line fp/no-class
+class TestError extends Error {}
+
+each(
+  [
+    Error,
+    TypeError,
+    runInNewContext('Error'),
+    runInNewContext('TypeError'),
+    TestError,
+  ],
+  ({ title }, ErrorClass) => {
+    test(`Allows any error class | ${title}`, (t) => {
+      t.notThrows(setErrorClass.bind(undefined, new Error('one'), ErrorClass))
+    })
+  },
+)
 
 // eslint-disable-next-line unicorn/no-null
 each([null, true], ({ title }, notAName) => {
