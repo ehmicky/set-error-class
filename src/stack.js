@@ -1,3 +1,5 @@
+import { setNonEnumProp } from './enum.js'
+
 // In some JavaScript engines, `error.stack` includes `error.name`, but is
 // not updated when `error.name` is modified. This fixes this.
 export const updateStack = function (error, currentName) {
@@ -38,16 +40,6 @@ const stackIncludesName = function () {
 
 const EXAMPLE_NAME = 'SetErrorClassError'
 const SHOULD_UPDATE_STACK = stackIncludesName()
-
-const setNonEnumProp = function (error, propName, value) {
-  // eslint-disable-next-line fp/no-mutating-methods
-  Object.defineProperty(error, propName, {
-    value,
-    enumerable: false,
-    writable: true,
-    configurable: true,
-  })
-}
 
 // We try to find the current name in `error.stack` and replace it.
 // If we cannot find it, this is a noop.
