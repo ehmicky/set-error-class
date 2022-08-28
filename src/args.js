@@ -37,6 +37,7 @@ const isClass = function (ErrorClass) {
   )
 }
 
+// Works cross-realm
 const isErrorClass = function (prototype) {
   return (
     prototype !== null &&

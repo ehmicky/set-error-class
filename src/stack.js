@@ -13,10 +13,10 @@ export const updateStack = function (error, currentName) {
 
 const shouldUpdateStack = function (error, currentName) {
   return (
-    stackIncludesName() &&
     currentName !== error.name &&
     currentName !== '' &&
-    error.stack.includes(currentName)
+    error.stack.includes(currentName) &&
+    stackIncludesName()
   )
 }
 
@@ -42,12 +42,16 @@ const EXAMPLE_NAME = 'SetErrorClassError'
 
 // We try to find the current name in `error.stack` and replace it.
 // If we cannot find it, this is a noop.
-//  - Unlike `error.message`, it is not as important for `error.name` to be
-//    missing from the stack
+//  - Unlike `error.message`, it is nice but not critical for the right
+//    `error.name` to be included in the stack
 // We only replace the first instance to prevent modifying the stack lines
 // in case the `name` is also a filename present in those.
 // `error.stack` is not standard so we do not try to assume its format.
 const getStack = function ({ name, stack }, currentName) {
+  if (stack.startsWith(`${currentName}: `)) {
+    return stack.replace(currentName, name)
+  }
+
   const replacers = getReplacers(currentName, name)
   const [fromA, to] = replacers.find(([from]) => stack.includes(from))
   return stack.replace(fromA, to)
