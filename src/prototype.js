@@ -19,7 +19,7 @@ const fixConstructor = function (error, ErrorClass) {
 }
 
 const fixName = function (error, ErrorClass) {
-  const prototypeName = getClassName(ErrorClass)
+  const prototypeName = getClassName(ErrorClass.prototype)
 
   if (
     prototypeName === error.name ||
@@ -33,12 +33,12 @@ const fixName = function (error, ErrorClass) {
   delete error.name
 }
 
-const getClassName = function (ErrorClass) {
-  if (ErrorClass === null) {
+const getClassName = function (prototype) {
+  if (prototype === null) {
     return 'Error'
   }
 
-  return typeof ErrorClass.name === 'string' && ErrorClass.name !== ''
-    ? ErrorClass.name
-    : getClassName(Object.getPrototypeOf(ErrorClass))
+  return typeof prototype.name === 'string' && prototype.name !== ''
+    ? prototype.name
+    : getClassName(Object.getPrototypeOf(prototype))
 }

@@ -18,7 +18,7 @@ const validateErrorClass = function (ErrorClass) {
     throw new TypeError(`ErrorClass must be a class: ${ErrorClass}`)
   }
 
-  if (!isErrorClass(ErrorClass)) {
+  if (!isErrorClass(ErrorClass.prototype)) {
     throw new TypeError(`ErrorClass must inherit from Error: ${ErrorClass}`)
   }
 
@@ -37,11 +37,11 @@ const isClass = function (ErrorClass) {
   )
 }
 
-const isErrorClass = function (ErrorClass) {
+const isErrorClass = function (prototype) {
   return (
-    ErrorClass !== null &&
-    (ErrorClass.name === 'Error' ||
-      isErrorClass(Object.getPrototypeOf(ErrorClass)))
+    prototype !== null &&
+    (prototype.name === 'Error' ||
+      isErrorClass(Object.getPrototypeOf(prototype)))
   )
 }
 
