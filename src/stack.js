@@ -13,7 +13,7 @@ export const updateStack = function (error, currentName) {
 
 const shouldUpdateStack = function (error, currentName) {
   return (
-    SHOULD_UPDATE_STACK &&
+    stackIncludesName() &&
     currentName !== error.name &&
     currentName !== '' &&
     error.stack.includes(currentName)
@@ -39,7 +39,6 @@ const stackIncludesName = function () {
 }
 
 const EXAMPLE_NAME = 'SetErrorClassError'
-const SHOULD_UPDATE_STACK = stackIncludesName()
 
 // We try to find the current name in `error.stack` and replace it.
 // If we cannot find it, this is a noop.
