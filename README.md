@@ -64,13 +64,13 @@ In V8 (Chrome, Node.js, Deno, etc.),
 includes
 [`error.name`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error/message).
 If `error.stack` contains `currentName` (which defaults to the current
-`error.name`), it is replaced by the new `error.name`.
+`error.name`), it is replaced with the new `error.name`.
 
 ### Error constructors
 
 `ErrorClass` is assigned to `error`, but its constructor is not called. In some
 instances, this might lead to invalid errors. If `ErrorClass`'s constructor is
-doing anything significant, it should be replicated on `error` as well.
+doing anything significant, that logic should be performed on `error` as well.
 
 # Related projects
 
