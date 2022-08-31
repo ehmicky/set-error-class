@@ -10,21 +10,17 @@ Properly update an error's class.
 
 # Example
 
-<!-- eslint-disable no-restricted-imports -->
-
 ```js
-import assert from 'assert'
-
 import setErrorClass from 'set-error-class'
 
 const typeError = new TypeError('test')
-assert(typeError instanceof TypeError)
+console.log(typeError instanceof TypeError) // true
 console.log(typeError.stack) // TypeError: test ...
 
 const rangeError = setErrorClass(typeError, RangeError)
-assert(rangeError === typeError)
-assert(rangeError instanceof RangeError)
-assert(rangeError.name === 'RangeError')
+console.log(rangeError === typeError) // true
+console.log(rangeError instanceof RangeError) // true
+console.log(rangeError.name) // 'RangeError'
 console.log(rangeError.stack) // RangeError: test ...
 ```
 
