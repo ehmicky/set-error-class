@@ -42,11 +42,11 @@ not `require()`.
 ## setErrorClass(error, ErrorClass, currentName?)
 
 `error` `Error | unknown`\
-`ErrorClass` `ErrorClass`\
+`ErrorClass` `typeof Error`\
 `currentName` `string?`\
 _Return value_: `Error`
 
-Sets the `error`'s class:
+Sets the `error`'s
 [prototype](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/getPrototypeOf),
 [`name`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error/name)
 and
@@ -63,12 +63,9 @@ In V8 (Chrome, Node.js, Deno, etc.),
 [`error.stack`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error/stack)
 includes
 [`error.name`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error/message).
-However, if `error.name` is modified, `error.stack` might not be updated and
-still contain the previous name.
-
-This library ensures `error.stack` is updated accordingly. If `error.stack`
-contains `currentName` (which defaults to the current `error.name`), it is
-replaced by the new `error.name`.
+This library ensures `error.stack` is updated according to `error.name`. If
+`error.stack` contains `currentName` (which defaults to the current
+`error.name`), it is replaced by the new `error.name`.
 
 ### Error constructors
 
