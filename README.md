@@ -52,12 +52,14 @@ Sets the `error`'s
 and
 [`constructor`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/constructor).
 
-### Invalid errors
+# Usage
+
+## Invalid errors
 
 `error` is returned. If `error` is not an `Error` instance, it is converted to
 one.
 
-### `error.stack`
+## `error.stack`
 
 In V8 (Chrome, Node.js, Deno, etc.),
 [`error.stack`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error/stack)
@@ -66,7 +68,7 @@ includes
 If `error.stack` contains `currentName` (which defaults to the current
 `error.name`), it is replaced with the new `error.name`.
 
-### Error constructors
+## Error constructors
 
 `ErrorClass` is assigned to `error`, but its constructor is not called. In some
 instances, this might lead to invalid errors. If `ErrorClass`'s constructor is
