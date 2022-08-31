@@ -8,6 +8,11 @@ Properly update an error's class.
 
 # Features
 
+- Sets an error's
+  [prototype, name and constructor](#seterrorclasserror-errorclass-currentname)
+- Update the [error's `stack`](#errorstack) with its new `name`
+- Handles [invalid errors](#invalid-errors)
+
 # Example
 
 ```js
