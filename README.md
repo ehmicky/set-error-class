@@ -63,9 +63,8 @@ In V8 (Chrome, Node.js, Deno, etc.),
 [`error.stack`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error/stack)
 includes
 [`error.name`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error/message).
-This library ensures `error.stack` is updated according with the new
-`error.name`. If `error.stack` contains `currentName` (which defaults to the
-current `error.name`), it is replaced by the new `error.name`.
+If `error.stack` contains `currentName` (which defaults to the current
+`error.name`), it is replaced by the new `error.name`.
 
 ### Error constructors
 
