@@ -87,6 +87,8 @@ doing anything significant, that logic should be performed on `error` as well.
   Create multiple error classes
 - [`error-custom-class`](https://github.com/ehmicky/error-custom-class): Create
   one error class
+- [`error-class-utils`](https://github.com/ehmicky/error-class-utils): Utilities
+  to properly create error classes
 - [`error-serializer`](https://github.com/ehmicky/error-serializer): Convert
   errors to/from plain objects
 - [`normalize-exception`](https://github.com/ehmicky/normalize-exception):
