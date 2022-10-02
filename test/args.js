@@ -5,7 +5,7 @@ import setErrorClass from 'set-error-class'
 import { each } from 'test-each'
 
 const funcWithNullPrototype = function () {}
-// eslint-disable-next-line unicorn/no-null, fp/no-mutation
+// eslint-disable-next-line fp/no-mutation
 funcWithNullPrototype.prototype = null
 
 // eslint-disable-next-line fp/no-class
@@ -14,7 +14,6 @@ class OddError extends Error {}
 OddError.prototype.constructor = ''
 
 each(
-  // eslint-disable-next-line unicorn/no-null
   [null, true, undefined, () => {}, funcWithNullPrototype, Set, OddError],
   ({ title }, notAClass) => {
     test(`Validate second argument is an error class | ${title}`, (t) => {
@@ -41,7 +40,6 @@ each(
   },
 )
 
-// eslint-disable-next-line unicorn/no-null
 each([null, true], ({ title }, notAName) => {
   test(`Validate third argument | ${title}`, (t) => {
     t.throws(setErrorClass.bind(undefined, new Error('one'), Error, notAName))

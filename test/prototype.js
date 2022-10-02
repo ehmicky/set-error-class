@@ -72,7 +72,7 @@ each([undefined, true, ''], ({ title }, name) => {
 test('Works with classes without a prototype name nor valid constructor', (t) => {
   // eslint-disable-next-line fp/no-class
   class NoValidConstructorError extends RangeError {}
-  // eslint-disable-next-line fp/no-mutation, unicorn/no-null
+  // eslint-disable-next-line fp/no-mutation
   NoValidConstructorError.prototype.constructor = null
   // eslint-disable-next-line fp/no-class
   class NoValidNameError extends NoValidConstructorError {}
