@@ -91,6 +91,8 @@ doing anything significant, that logic should be performed on `error` as well.
   errors to/from plain objects
 - [`normalize-exception`](https://github.com/ehmicky/normalize-exception):
   Normalize exceptions/errors
+- [`is-error-instance`](https://github.com/ehmicky/is-error-instance): Check if
+  a value is an `Error` instance
 - [`set-error-message`](https://github.com/ehmicky/set-error-message): Properly
   update an error's message
 - [`set-error-props`](https://github.com/ehmicky/set-error-props): Properly
