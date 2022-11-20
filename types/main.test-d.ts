@@ -5,10 +5,10 @@ import setErrorClass from 'set-error-class'
 const error = new Error('test')
 expectAssignable<Error>(setErrorClass(error, Error))
 
-setErrorClass(error, Error, '')
-setErrorClass(error, TypeError, '')
+setErrorClass(error, Error)
+setErrorClass(error, TypeError)
 class TestError extends Error {}
-setErrorClass(error, TestError, '')
+setErrorClass(error, TestError)
 
 expectError(setErrorClass(error))
 expectError(setErrorClass(error, 'Error'))

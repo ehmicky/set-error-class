@@ -11,7 +11,7 @@ Properly update an error's class.
 # Features
 
 - Sets an error's
-  [prototype, name and constructor](#seterrorclasserror-errorclass-currentname)
+  [prototype, name and constructor](#seterrorclasserror-errorclass)
 - Update the [error's `stack`](#errorstack) with its new `name`
 - Handles [invalid errors](#invalid-errors)
 
@@ -48,11 +48,10 @@ not `require()`.
 
 # API
 
-## setErrorClass(error, ErrorClass, currentName?)
+## setErrorClass(error, ErrorClass)
 
 `error` `Error | unknown`\
 `ErrorClass` `typeof Error`\
-`currentName` `string?`\
 _Return value_: `Error`
 
 Sets the `error`'s
@@ -74,8 +73,7 @@ In V8 (Chrome, Node.js, Deno, etc.),
 [`error.stack`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error/stack)
 includes
 [`error.name`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error/message).
-If `error.stack` contains `currentName` (which defaults to the current
-`error.name`), it is replaced with the new `error.name`.
+It is updated accordingly.
 
 ## Error constructors
 
