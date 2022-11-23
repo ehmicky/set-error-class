@@ -113,6 +113,8 @@ doing anything significant, that logic should be performed on `error` as well.
   some ❤ to Node.js process errors
 - [`error-http-response`](https://github.com/ehmicky/error-http-response):
   Create HTTP error responses
+- [`winston-error-format`](https://github.com/ehmicky/winston-error-format): Log
+  errors with Winston
 
 # Support
 
