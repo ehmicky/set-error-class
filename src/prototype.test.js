@@ -1,6 +1,7 @@
 import test from 'ava'
-import setErrorClass from 'set-error-class'
 import { each } from 'test-each'
+
+import setErrorClass from 'set-error-class'
 
 test('Sets the prototype', (t) => {
   const error = new Error('test')
