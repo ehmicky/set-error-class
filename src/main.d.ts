@@ -25,5 +25,5 @@ type NormalizeError<ErrorArg> = ErrorArg extends Error ? ErrorArg : Error
  */
 export default function setErrorClass<ErrorArg>(
   error: ErrorArg,
-  ErrorClass: Function,
+  ErrorClass: new () => unknown,
 ): NormalizeError<ErrorArg>

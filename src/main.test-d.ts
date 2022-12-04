@@ -16,6 +16,8 @@ setErrorClass(error)
 // @ts-expect-error
 setErrorClass(error, 'Error')
 // @ts-expect-error
+setErrorClass(error, () => new Error(''))
+// @ts-expect-error
 setErrorClass(error, Error, true)
 
 expectAssignable<Error>(setErrorClass(null, Error))
