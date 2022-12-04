@@ -7,6 +7,7 @@ expectAssignable<Error>(setErrorClass(error, Error))
 
 setErrorClass(error, Error)
 setErrorClass(error, TypeError)
+// eslint-disable-next-line fp/no-class
 class TestError extends Error {}
 setErrorClass(error, TestError)
 
