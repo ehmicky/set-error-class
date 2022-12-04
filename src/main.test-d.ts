@@ -1,4 +1,4 @@
-import { expectType, expectAssignable, expectError } from 'tsd'
+import { expectType, expectAssignable } from 'tsd'
 
 import setErrorClass from 'set-error-class'
 
@@ -10,9 +10,12 @@ setErrorClass(error, TypeError)
 class TestError extends Error {}
 setErrorClass(error, TestError)
 
-expectError(setErrorClass(error))
-expectError(setErrorClass(error, 'Error'))
-expectError(setErrorClass(error, Error, true))
+// @ts-expect-error
+setErrorClass(error)
+// @ts-expect-error
+setErrorClass(error, 'Error')
+// @ts-expect-error
+setErrorClass(error, Error, true)
 
 expectAssignable<Error>(setErrorClass(null, Error))
 expectType<true>(setErrorClass(error as Error & { prop: true }, Error).prop)
