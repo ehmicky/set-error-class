@@ -1,38 +1,38 @@
-# 1.5.0
+# 1.6.0
 
 ## Features
 
 - Improve TypeScript types
 
-# 1.4.0
+# 1.5.0
 
 ## Documentation
 
 - Undocument the third argument
 
-# 1.3.0
+# 1.4.0
 
 ## Features
 
 - Improve tree-shaking support
 
-# 1.2.0
+# 1.3.0
 
 ## Features
 
 - Add browser support
 
-# 1.1.1
+# 1.2.1
 
 ## Bug fixes
 
 - Fix `package.json`
 
-# 1.1.0
+# 1.2.0
 
 - Switch to MIT license
 
-# 1.0.2
+# 1.1.0
 
 ## Bug fixes
 
