@@ -2,7 +2,7 @@ import { setNonEnumProp } from './enum.js'
 
 // In some JavaScript engines, `error.stack` includes `error.name`, but is
 // not updated when `error.name` is modified. This fixes this.
-export const updateStack = function (error, currentName) {
+export const updateStack = (error, currentName) => {
   if (!shouldUpdateStack(error, currentName)) {
     return
   }
@@ -11,17 +11,14 @@ export const updateStack = function (error, currentName) {
   setNonEnumProp(error, 'stack', stack)
 }
 
-const shouldUpdateStack = function (error, currentName) {
-  return (
-    currentName !== error.name &&
-    currentName !== '' &&
-    error.stack.includes(currentName) &&
-    stackIncludesName()
-  )
-}
+const shouldUpdateStack = (error, currentName) =>
+  currentName !== error.name &&
+  currentName !== '' &&
+  error.stack.includes(currentName) &&
+  stackIncludesName()
 
 // Only V8 includes `error.name` in `error.stack`
-const stackIncludesName = function () {
+const stackIncludesName = () => {
   // eslint-disable-next-line fp/no-class
   class StackError extends Error {}
   const descriptor = {
@@ -47,7 +44,7 @@ const EXAMPLE_NAME = 'SetErrorClassError'
 // We only replace the first instance to prevent modifying the stack lines
 // in case the `name` is also a filename present in those.
 // `error.stack` is not standard so we do not try to assume its format.
-const getStack = function ({ name, stack }, currentName) {
+const getStack = ({ name, stack }, currentName) => {
   if (stack.startsWith(`${currentName}: `)) {
     return stack.replace(currentName, name)
   }
@@ -59,11 +56,9 @@ const getStack = function ({ name, stack }, currentName) {
 
 // We try a series of most to least specific patterns to prevent changing
 // error names present in previews (e.g. from Node.js `--enable-source-maps`).
-const getReplacers = function (currentName, newName) {
-  return [
-    [`\n${currentName}: `, `\n${newName}: `],
-    [`${currentName}: `, `${newName}: `],
-    [`${currentName} `, `${newName} `],
-    [currentName, newName],
-  ]
-}
+const getReplacers = (currentName, newName) => [
+  [`\n${currentName}: `, `\n${newName}: `],
+  [`${currentName}: `, `${newName}: `],
+  [`${currentName} `, `${newName} `],
+  [currentName, newName],
+]

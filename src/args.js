@@ -1,10 +1,6 @@
 // Normalize and validate arguments.
 // `currentName` is undocumented, and mostly meant for `merge-error-cause`.
-export const normalizeArgs = function (
-  error,
-  ErrorClass,
-  currentName = error.name,
-) {
+export const normalizeArgs = (error, ErrorClass, currentName = error.name) => {
   validateErrorClass(ErrorClass)
 
   if (typeof currentName !== 'string') {
@@ -14,7 +10,7 @@ export const normalizeArgs = function (
   return currentName
 }
 
-const validateErrorClass = function (ErrorClass) {
+const validateErrorClass = (ErrorClass) => {
   if (!isClass(ErrorClass)) {
     throw new TypeError(`ErrorClass must be a class: ${ErrorClass}`)
   }
@@ -30,23 +26,15 @@ const validateErrorClass = function (ErrorClass) {
   }
 }
 
-const isClass = function (ErrorClass) {
-  return (
-    typeof ErrorClass === 'function' &&
-    typeof ErrorClass.prototype === 'object' &&
-    ErrorClass.prototype !== null
-  )
-}
+const isClass = (ErrorClass) =>
+  typeof ErrorClass === 'function' &&
+  typeof ErrorClass.prototype === 'object' &&
+  ErrorClass.prototype !== null
 
 // Works cross-realm
-const isErrorClass = function (prototype) {
-  return (
-    prototype !== null &&
-    (prototype.name === 'Error' ||
-      isErrorClass(Object.getPrototypeOf(prototype)))
-  )
-}
+const isErrorClass = (prototype) =>
+  prototype !== null &&
+  (prototype.name === 'Error' || isErrorClass(Object.getPrototypeOf(prototype)))
 
-const hasConstructor = function (ErrorClass) {
-  return typeof ErrorClass.prototype.constructor === 'function'
-}
+const hasConstructor = (ErrorClass) =>
+  typeof ErrorClass.prototype.constructor === 'function'

@@ -1,7 +1,7 @@
 import { setNonEnumProp } from './enum.js'
 
 // Changes an error's prototype, `constructor` and `name`
-export const updatePrototype = function (error, ErrorClass) {
+export const updatePrototype = (error, ErrorClass) => {
   if (Object.getPrototypeOf(error) === ErrorClass.prototype) {
     return
   }
@@ -15,7 +15,7 @@ export const updatePrototype = function (error, ErrorClass) {
 // This ensures all properties are inherited.
 // However, `error` will have been instantiated with a different constructor,
 // which is a difference, especially if error properties are not copied.
-const setPrototype = function (error, ErrorClass) {
+const setPrototype = (error, ErrorClass) => {
   // eslint-disable-next-line fp/no-mutating-methods
   Object.setPrototypeOf(error, ErrorClass.prototype)
 }
@@ -29,7 +29,7 @@ const setPrototype = function (error, ErrorClass) {
 // In general, it will be set on `ErrorClass.prototype.name`, so `error.name`
 // will already be correct and we do not need to create an own property
 // shadowing it.
-const fixName = function (error, ErrorClass) {
+const fixName = (error, ErrorClass) => {
   deleteOwnProperty(error, 'name')
 
   const prototypeName = getClassName(ErrorClass.prototype)
@@ -39,34 +39,27 @@ const fixName = function (error, ErrorClass) {
   }
 }
 
-const getClassName = function (prototype) {
-  return (
-    getPrototypeName(prototype) ??
-    getConstructorName(prototype) ??
-    getClassName(Object.getPrototypeOf(prototype))
-  )
-}
+const getClassName = (prototype) =>
+  getPrototypeName(prototype) ??
+  getConstructorName(prototype) ??
+  getClassName(Object.getPrototypeOf(prototype))
 
-const getPrototypeName = function (prototype) {
-  return isOwn.call(prototype, 'name') && isDefinedString(prototype.name)
+const getPrototypeName = (prototype) =>
+  isOwn.call(prototype, 'name') && isDefinedString(prototype.name)
     ? prototype.name
     : undefined
-}
 
-const getConstructorName = function (prototype) {
-  return typeof prototype.constructor === 'function' &&
-    isDefinedString(prototype.constructor.name)
+const getConstructorName = (prototype) =>
+  typeof prototype.constructor === 'function' &&
+  isDefinedString(prototype.constructor.name)
     ? prototype.constructor.name
     : undefined
-}
 
-const isDefinedString = function (value) {
-  return typeof value === 'string' && value !== ''
-}
+const isDefinedString = (value) => typeof value === 'string' && value !== ''
 
 // Delete `error.constructor|name` to ensure it is not shadowing
 // `error.__proto__.constructor|name`.
-const deleteOwnProperty = function (error, propName) {
+const deleteOwnProperty = (error, propName) => {
   if (isOwn.call(error, propName)) {
     // eslint-disable-next-line fp/no-delete
     delete error[propName]
