@@ -1,7 +1,7 @@
 import test from 'ava'
+import setErrorClass from 'set-error-class'
 import { each } from 'test-each'
 
-import setErrorClass from 'set-error-class'
 
 each(['one', undefined], ({ title }, stack) => {
   test.serial(

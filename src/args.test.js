@@ -1,9 +1,9 @@
 import { runInNewContext } from 'node:vm'
 
 import test from 'ava'
+import setErrorClass from 'set-error-class'
 import { each } from 'test-each'
 
-import setErrorClass from 'set-error-class'
 
 const funcWithNullPrototype = () => {}
 // eslint-disable-next-line fp/no-mutation

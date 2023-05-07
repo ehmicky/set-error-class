@@ -1,6 +1,6 @@
+import setErrorClass from 'set-error-class'
 import { expectType, expectAssignable } from 'tsd'
 
-import setErrorClass from 'set-error-class'
 
 const error = new Error('test')
 expectAssignable<Error>(setErrorClass(error, Error))

@@ -1,7 +1,7 @@
 import test from 'ava'
+import setErrorClass from 'set-error-class'
 import { each } from 'test-each'
 
-import setErrorClass from 'set-error-class'
 
 each([undefined, null, '', {}], ({ title }, notAnError) => {
   test(`Normalizes the error | ${title}`, (t) => {
