@@ -45,7 +45,7 @@ const getClassName = (prototype) =>
   getClassName(Object.getPrototypeOf(prototype))
 
 const getPrototypeName = (prototype) =>
-  isOwn.call(prototype, 'name') && isDefinedString(prototype.name)
+  Object.hasOwn(prototype, 'name') && isDefinedString(prototype.name)
     ? prototype.name
     : undefined
 
@@ -60,10 +60,8 @@ const isDefinedString = (value) => typeof value === 'string' && value !== ''
 // Delete `error.constructor|name` to ensure it is not shadowing
 // `error.__proto__.constructor|name`.
 const deleteOwnProperty = (error, propName) => {
-  if (isOwn.call(error, propName)) {
+  if (Object.hasOwn(error, propName)) {
     // eslint-disable-next-line fp/no-delete
     delete error[propName]
   }
 }
-
-const { hasOwnProperty: isOwn } = Object.prototype
