@@ -2,7 +2,6 @@ import test from 'ava'
 import setErrorClass from 'set-error-class'
 import { each } from 'test-each'
 
-
 test('Sets the prototype', (t) => {
   const error = new Error('test')
   t.false(error instanceof TypeError)

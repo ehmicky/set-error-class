@@ -4,7 +4,6 @@ import test from 'ava'
 import setErrorClass from 'set-error-class'
 import { each } from 'test-each'
 
-
 const funcWithNullPrototype = () => {}
 // eslint-disable-next-line fp/no-mutation
 funcWithNullPrototype.prototype = null

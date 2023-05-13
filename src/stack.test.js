@@ -2,7 +2,6 @@ import test from 'ava'
 import setErrorClass from 'set-error-class'
 import { each } from 'test-each'
 
-
 each(['one', undefined], ({ title }, stack) => {
   test.serial(
     `Only update error stack if engine includes name in it | ${title}`,
