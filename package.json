@@ -21,7 +21,10 @@
   "keywords": [],
   "license": "MIT",
   "homepage": "https://www.github.com/ehmicky/set-error-class",
-  "repository": "ehmicky/set-error-class",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ehmicky/set-error-class.git"
+  },
   "bugs": {
     "url": "https://github.com/ehmicky/set-error-class/issues"
   },
