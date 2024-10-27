@@ -56,7 +56,6 @@ each([undefined, true, ''], ({ title }, name) => {
     // eslint-disable-next-line fp/no-class
     class NoNamesError extends RangeError {}
 
-    // eslint-disable-next-line fp/no-mutating-methods
     Object.defineProperty(NoNamesError, 'name', {
       value: name,
       enumerable: false,
@@ -77,7 +76,6 @@ test('Works with classes without a prototype name nor valid constructor', (t) =>
   NoValidConstructorError.prototype.constructor = null
   // eslint-disable-next-line fp/no-class
   class NoValidNameError extends NoValidConstructorError {}
-  // eslint-disable-next-line fp/no-mutating-methods
   Object.defineProperty(NoValidNameError, 'name', {
     value: '',
     enumerable: false,
