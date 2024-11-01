@@ -16,6 +16,7 @@ export const updatePrototype = (error, ErrorClass) => {
 // However, `error` will have been instantiated with a different constructor,
 // which is a difference, especially if error properties are not copied.
 const setPrototype = (error, ErrorClass) => {
+  // eslint-disable-next-line fp/no-mutating-methods
   Object.setPrototypeOf(error, ErrorClass.prototype)
 }
 

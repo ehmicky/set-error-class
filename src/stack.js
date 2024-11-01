@@ -27,7 +27,9 @@ const stackIncludesName = () => {
     writable: true,
     configurable: true,
   }
+  // eslint-disable-next-line fp/no-mutating-methods
   Object.defineProperty(StackError, 'name', descriptor)
+  // eslint-disable-next-line fp/no-mutating-methods
   Object.defineProperty(StackError.prototype, 'name', descriptor)
   const { stack } = new StackError('')
   return typeof stack === 'string' && stack.includes(EXAMPLE_NAME)
