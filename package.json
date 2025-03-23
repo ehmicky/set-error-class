@@ -33,7 +33,7 @@
     "lib": "src"
   },
   "dependencies": {
-    "normalize-exception": "^4.0.0"
+    "normalize-exception": "^4.0.1"
   },
   "devDependencies": {
     "@ehmicky/dev-tasks": "^3.0.33",
